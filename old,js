@@ -1,0 +1,95 @@
+       function cid(obj) {
+            return obj.id.split('_')[0]
+        }
+        $(function() {
+            TweenLite.to("[id$=descr]", 0, {
+                transformOrigin: '50% 50%',
+                scale: 0
+            });
+            TweenLite.to("[id=plant_descrx]", 0, {
+                transformOrigin: '50% 50%',
+                scale: 1
+            });
+            TweenLite.to(".transform", 0, {
+                transformOrigin: '50% 50%'
+            });
+            pathc = Snap("#tbc_path");
+            pathh = Snap("#tbh_path");
+            lenc = pathc.getTotalLength();
+            lenh = pathh.getTotalLength();
+            moverc = Snap("#moverc");
+            moverh = Snap("#moverh");
+            vel = 100;
+            time = 1e6;
+
+            $(".touch, [id$=circ], [id$=descr]").mouseover(function() {
+                var id = cid(this);
+                $('#' + id + '_mark').css({
+                    'display': 'block'
+                });
+                TweenLite.to('#' + id + '_descr', 1, {
+                    scale: 1
+                });
+                TweenLite.to('#plant_descrx', 1, {
+                    scale: 0
+                });
+                $('#' + id + '_circ').addClass("selected");
+            }).mouseout(function() {
+                var id = cid(this);
+                TweenLite.to('#' + id + '_descr', 1, {
+                    scale: 0,
+                    backgroundColor: 'none'
+                });
+                $('#' + id + '_mark').css({
+                    'display': 'none'
+                });
+                $('#' + id + '_circ').removeClass("selected");
+                TweenLite.to(id, 0.25, {
+                    scale: 1,
+                    rotation: '0_ccw'
+                });
+                TweenLite.to('#plant_descrx', 1, {
+                    scale: 1
+                });
+                TweenLite.to('svg', 5, {
+                    scale: 1,
+                    x: 0,
+                    y: 0
+                });
+            }).mousedown(function() {
+                // TweenLite.to('#'+cid(this), 0.25, {scale: 0.7, rotation:'180_ccw'});
+                var id = cid(this);
+                var svg = $('svg');
+                // var bb = $('#'+id)[0].getBoundingClientRect();
+                // var bbs = svg[0].getBoundingClientRect();
+                var bb = $('#' + id)[0].getBBox();
+                var bbs = svg[0].getBBox();
+                var bbso = svg[0].getBoundingClientRect();
+                var px = bb.x + bb.width;
+                var py = bb.y + bb.height / 2;
+                var tx = bbs.x + bbs.width * 0.58;
+                var ty = bbs.y + bbs.height * 0.18;
+                var rx = px - bbs.x;
+                var ry = py - bbs.y;
+                var ax = tx - px;
+                var ay = ty - py;
+                var scx = svg.width() / bbs.width;
+                var scy = svg.height() / bbs.height;
+                ax *= scx;
+                ay *= scy;
+                rx *= scx;
+                ry *= scy;
+                TweenLite.to('svg', 1, {
+                    transformOrigin: rx + ' ' + ry,
+                    x: ax,
+                    y: ay,
+                    scale: 1.4
+                });
+                TweenLite.to('#' + id + '_descr', 1, {
+                    backgroundColor: 'rgba(1,0,0,0.4)'
+                });
+            }).mouseup(function() {
+                // TweenLite.to('#'+cid(this), 0.25, {scale: 1, rotation:'0_ccw'});
+                // TweenLite.to('svg', 1, {scale: 1, rotation:'0_ccw'});
+            });
+        });

@@ -1,0 +1,95 @@
+@font-face {
+    font-family: Signika;
+    src: url("fonts/signika/Signika-Regular.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Signika;
+    font-weight: bold;
+    src: url("fonts/signika/Signika-Bold.otf") format("opentype");
+}
+
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Signika;
+}
+
+svg {
+    background-color: #DEF;
+    position: relative;
+    width: 190%;
+    margin-left: -45%;
+    margin-top: -20%;
+    margin-bottom: -20%;
+    perspective: 1px;
+}
+
+#xplant {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+#abox {
+    position: absolute;
+    top: 27%;
+    right: 3%;
+    width: 28%;
+    border-radius: 25px;
+    background: rgba(0, 0, 0, 0.8);
+    text-align: center;
+}
+
+svg .touch {
+    cursor: pointer;
+}
+
+h1 {}
+
+.circles {
+    display: inline-block;
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    margin: 7px;
+    background: grey;
+    border-radius: 50%;
+    float: left;
+    cursor: pointer;
+}
+
+.circle:hover {
+    background: lightgrey;
+}
+
+.descriptions {
+    clear: both;
+    min-height: 400px;
+    text-align: left;
+    overflow: scroll;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.description_box {
+    position: absolute;
+    color: white;
+    padding: 10px;
+    border-radius: 25px;
+    display: none;
+}
+
+.description_box h2 {
+    padding-top: 0;
+    margin-top: 0;
+}
